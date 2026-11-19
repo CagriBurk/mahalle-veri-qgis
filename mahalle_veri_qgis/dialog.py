@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from qgis.core import QgsFeedback
 from qgis.gui import QgsFileWidget
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import (
@@ -17,6 +18,7 @@ from qgis.PyQt.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QPlainTextEdit,
+    QProgressDialog,
     QPushButton,
     QVBoxLayout,
 )
@@ -125,12 +127,28 @@ class LoadDialog(QDialog):
             self.status.setText("Önce katalogdan bir paket seçin.")
             return
         entry = self.entries[i]
-        self._busy(f"İndiriliyor: {entry['dosya']} ({int(entry['boyut']) / 1e6:.1f} MB)…")
+        size_mb = int(entry["boyut"]) / 1e6
+        self._busy(f"İndiriliyor: {entry['dosya']} ({size_mb:.1f} MB)…")
+        bar = QProgressDialog(f"{C.label(entry)} indiriliyor…", "İptal", 0, 100, self)
+        bar.setWindowTitle("Mahalle Veri")
+        bar.setWindowModality(Qt.WindowModality.WindowModal)
+        bar.setMinimumDuration(0)
+        bar.setValue(0)
+        feedback = QgsFeedback()
+        bar.canceled.connect(feedback.cancel)
+
+        def progress(received: int, total: int) -> None:
+            total = total if total > 0 else int(entry["boyut"])
+            bar.setValue(min(99, int(received * 100 / max(total, 1))))
+            bar.setLabelText(f"{C.label(entry)}\n{received / 1e6:.1f} / {total / 1e6:.1f} MB")
+
         try:
-            path = remote.download_package(entry)
+            path = remote.download_package(entry, feedback=feedback, progress=progress)
         except C.CatalogError as exc:
             self.status.setText(str(exc))
             return
+        finally:
+            bar.close()
         self.file.setFilePath(str(path))
         self._load_path(path)
 
