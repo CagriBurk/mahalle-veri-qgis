@@ -1,0 +1,17 @@
+[general]
+name=Mahalle Veri
+qgisMinimumVersion=3.34
+qgisMaximumVersion=4.99
+supportsQt6=yes
+description=Mahalle düzeyinde, kaynağı ve tarihi belli veri paketini (GeoPackage) hazır stillerle QGIS'e yükler.
+about=mahalle-veri komut satırı aracının ürettiği GeoPackage dosyasını (mahalle sınırları, nüfus, yaş, hane, bina, park ve donatı katmanları) tek bir grup altında, nüfus yoğunluğu haritası ve ilçe sınırlarıyla birlikte yükler; isteğe bağlı OpenStreetMap altlığı ekler ve paketteki kaynak ve lisans bilgisini gösterir. Veri paketlerinde OpenStreetMap verisi bulunur (© OpenStreetMap katkıcıları, ODbL).
+version=0.1.0
+author=Çağrı, Umut
+repository=https://github.com/CagriBurk/mahalle-veri-qgis
+tracker=https://github.com/CagriBurk/mahalle-veri-qgis/issues
+homepage=https://github.com/CagriBurk/mahalle-veri-qgis
+tags=planning,urban planning,neighbourhood,mahalle,population,census,turkey,izmir
+category=Vector
+icon=icon.svg
+experimental=True
+deprecated=False
