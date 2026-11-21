@@ -1,4 +1,28 @@
-# Mahalle Veri: QGIS eklentisi
+# Mahalle Veri: QGIS plugin
+
+A QGIS plugin that loads neighbourhood-level data packages into QGIS in one click. Every
+package states its sources and dates, and the layers come pre-styled:
+
+- population density map (neighbourhoods without data shown in grey),
+- district boundaries and labels,
+- education, health and emergency assembly points,
+- public transport stops and parks,
+- an optional OpenStreetMap basemap.
+
+Packages are downloaded once from a catalogue and are used only after their SHA-256 checksum
+is verified. Licences, attributions and production warnings are shown inside the plugin.
+Currently one package is available: **İzmir**. Supports QGIS 3.34+ and QGIS 4.x.
+
+**Install:** download `mahalle_veri_qgis-<version>.zip` from [Releases](../../releases), then in
+QGIS use *Plugins → Manage and Install Plugins → Install from ZIP*, and open
+*Vector → Mahalle Veri*.
+
+Data packages: [mahalle-veri-paketler](https://github.com/CagriBurk/mahalle-veri-paketler)
+(ODbL 1.0, © OpenStreetMap contributors). Plugin licence: GNU GPL v2 or later.
+
+---
+
+## Türkçe
 
 Mahalle düzeyindeki veri paketlerini tek tıkla QGIS'e yükler. Her paketin kaynağı ve tarihi bellidir. Katmanlar hazır stillerle gelir:
 
